@@ -82,13 +82,7 @@ get_tdb_url() {
   declare tag="${1:-TDB}"
   # https://developer.github.com/v3/
   # https://github.com/TrinityCore/TrinityCore/releases
-  curl -sSL ${GITHUB_USER:+"-u$GITHUB_USER:$GITHUB_PASS"} \
-    "${GITHUB_API:-https://api.github.com}/repos/${GITHUB_REPO:-TrinityCore/TrinityCore}/releases" \
-    | jq -r "\"tdb_url=\" + ( [
-                .[] | select(
-                .tag_name | contains( \"$tag\" ) )
-                .assets[] .browser_download_url
-              ] | max )"
+  wget https://github.com/TrinityCore/TrinityCore/releases/download/TDB335.19041/TDB_full_world_335.19041_2019_04_15.7z
 }
 
 extract_7z_archives() {
